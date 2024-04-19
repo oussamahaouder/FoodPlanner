@@ -13,6 +13,6 @@ namespace TaskManagerApp.Infrastructure
         public DbSet<Meal> Meal { get; set; }
         public DbSet<Ingredient> Ingredient { get; set; }
 
-        public DbSet<MealIngredient> MealIngredients{ get; set; }
+        public DbSet<MealIngredient> MealIngredient{ get; set; }
     }
 }

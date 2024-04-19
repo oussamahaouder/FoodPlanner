@@ -1,11 +1,11 @@
 ﻿using TaskManagerApp.Controllers.Requests;
-using TaskManagerApp.Infrastructure;
+using TaskManagerApp.Domain.Interfaces;
 using TaskManagerApp.Infrastructure.Adapters;
 using TaskManagerApp.Models;
 
 namespace TaskManagerApp.Domain.Services
 {
-    public class FoodService
+    public class FoodService : IFoodService
     {
         public readonly FoodAdapter _foodAdapter;
 
@@ -34,7 +34,7 @@ namespace TaskManagerApp.Domain.Services
         {
             List<Meal> allMealsWithoutIngerdients = await _foodAdapter.FetchAllMeals();
 
-            return 
+            return allMealsWithoutIngerdients; 
         }
         public async Task DeleteMeal(int mealId)
         {
@@ -48,6 +48,11 @@ namespace TaskManagerApp.Domain.Services
             {
                 throw new Exception("No element foud for the given id");
             }
+        }
+
+        public async Task UpdateMeal(UpdateMealRequest mealRequest)
+        {
+            await Task.Delay(10) ;
         }
 
         private async Task AddIngredients(List<Ingredient> ingredients , int mealId)
@@ -69,7 +74,7 @@ namespace TaskManagerApp.Domain.Services
                 };
                 await _foodAdapter.SaveMealIngredients(mealIngredient);
             }
-
+        
 
         }
     }

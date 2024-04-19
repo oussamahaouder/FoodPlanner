@@ -3255,19 +3255,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oussa\\.nuget\\packages\\": {}
+    "C:\\Users\\a926747\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DevSkills\\TaskManagerApp\\TaskManagerApp.csproj",
+      "projectUniqueName": "C:\\Users\\a926747\\Dev\\FoodPlanner\\TaskManagerApp.csproj",
       "projectName": "TaskManagerApp",
-      "projectPath": "D:\\DevSkills\\TaskManagerApp\\TaskManagerApp.csproj",
-      "packagesPath": "C:\\Users\\oussa\\.nuget\\packages\\",
-      "outputPath": "D:\\DevSkills\\TaskManagerApp\\obj\\",
+      "projectPath": "C:\\Users\\a926747\\Dev\\FoodPlanner\\TaskManagerApp.csproj",
+      "packagesPath": "C:\\Users\\a926747\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\a926747\\Dev\\FoodPlanner\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\oussa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\a926747\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3334,7 +3334,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

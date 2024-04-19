@@ -7,8 +7,8 @@ namespace TaskManagerApp.Controllers.Requests
     {
        
         [Required]      
-        public string MealName { get; set;}  
-        public string MealDescription { get; set;}
-        public List<Ingredient> MealIngredients { get; set; }
+        public required string MealName { get; set;}  
+        public string? MealDescription { get; set;}
+        public List<Ingredient>? MealIngredients { get; set; }
     }
 }

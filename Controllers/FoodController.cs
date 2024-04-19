@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TaskManagerApp.Controllers.Requests;
+using TaskManagerApp.Domain.Interfaces;
 using TaskManagerApp.Domain.Services;
 using TaskManagerApp.Models;
 
@@ -12,9 +13,9 @@ namespace TaskManagerApp.Controllers
     [ApiController]
     public class FoodController : ControllerBase
     {
-        public readonly FoodService _foodService;
+        public readonly IFoodService _foodService;
         
-        public FoodController(FoodService foodService)
+        public FoodController(IFoodService foodService)
         {   
                 _foodService = foodService;
         }
@@ -38,6 +39,13 @@ namespace TaskManagerApp.Controllers
             await _foodService.DeleteMeal(mealId);
            return Ok();
             
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateMeal(UpdateMealRequest mealRequest)
+        {
+            await _foodService.UpdateMeal(mealRequest);
+            return Ok(mealRequest);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace TaskManagerApp.Infrastructure.Adapters
 
         public async Task<int?> FindIngredient(string ingredientName)
         {
-            var ingerdient = await _dataBaseContext.Ingredient.FirstOrDefaultAsync(ingredient => ingredient.Name == ingredientName);
+            Ingredient? ingerdient = await _dataBaseContext.Ingredient.FirstOrDefaultAsync(ingredient => ingredient.Name == ingredientName);
              if (ingerdient != null)
             {
                 return ingerdient.Id;
@@ -37,7 +37,7 @@ namespace TaskManagerApp.Infrastructure.Adapters
 
         public async Task SaveMealIngredients(MealIngredient mealIngredient )
         {
-            await _dataBaseContext.MealIngredients.AddAsync(mealIngredient); 
+            await _dataBaseContext.MealIngredient.AddAsync(mealIngredient); 
             await _dataBaseContext.SaveChangesAsync();
         }
 
@@ -57,8 +57,8 @@ namespace TaskManagerApp.Infrastructure.Adapters
         public Task DeleteMealById(Meal meal)
         {
              _dataBaseContext.Meal.Remove(meal);
-            _dataBaseContext.SaveChanges(); 
-            return Task.CompletedTask;
+             _dataBaseContext.SaveChanges(); 
+             return Task.CompletedTask;
         }
     }
 }

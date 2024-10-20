@@ -10,6 +10,9 @@ namespace TaskManagerApp.Models
         [Required]
         public required string Name { get; set; }
         public string? Description { get; set; }
+        [NotMapped]
+        public List<int?>? IngredientIds { get; set; }
+
     }
     
    

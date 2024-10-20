@@ -1,20 +1,18 @@
-﻿using TaskManagerApp.Controllers.Requests;
+﻿
+using TaskManagerApp.Application.UseCases.Command;
+using TaskManagerApp.Domain.Interfaces;
 using TaskManagerApp.Infrastructure;
 using TaskManagerApp.Infrastructure.Adapters;
+using TaskManagerApp.Infrastructure.Interfaces;
 using TaskManagerApp.Models;
 
 namespace TaskManagerApp.Domain.Services
 {
-    public class FoodService
+    public class FoodService(FoodAdapter foodAdapter) : IFoodService
     {
-        public readonly FoodAdapter _foodAdapter;
+        public readonly IFoodAdapter _foodAdapter = foodAdapter;
 
-        public FoodService(FoodAdapter foodAdapter)
-        {
-            _foodAdapter = foodAdapter;
-        }
-
-        public async Task CreateMeal(CreateMealRequest mealDto)
+        public async Task<int> CreateMeal(CreateMealRequest mealDto)
         {
            
             Meal meal = new()
@@ -28,13 +26,29 @@ namespace TaskManagerApp.Domain.Services
             var mealId = meal.Id;
 
             await AddIngredients(mealDto.MealIngredients,mealId);
+            return mealId;
+            
         }
 
         public async Task<List<Meal>> GetAllMeals()
         {
-            List<Meal> allMealsWithoutIngerdients = await _foodAdapter.FetchAllMeals();
+            var allMealsWithoutIngerdients = await _foodAdapter.FetchAllMeals();
+            foreach (var meal in  allMealsWithoutIngerdients)
+            {
 
-            return 
+                // Assign only the IngredientIds to a separate list
+                meal.IngredientIds = (await _foodAdapter.GetMealIngredientsByMealId(meal.Id))
+                                    .Select(ingr => ingr.IngredientId)
+                                    .ToList();
+            }
+
+            return allMealsWithoutIngerdients;
+        }
+
+        public async Task<List<Ingredient>> GetIngredientsAsync()
+        {
+            var ingeredients = await _foodAdapter.GetIngredients();
+            return ingeredients;
         }
         public async Task DeleteMeal(int mealId)
         {
@@ -58,7 +72,7 @@ namespace TaskManagerApp.Domain.Services
                 if (ingerdientId == null )
                 {
                     Ingredient ingredientToCreate = new() { Name = ingredient.Name };
-                    ingerdientId = await _foodAdapter.AddMealIngredients(ingredientToCreate);
+                    ingerdientId = await _foodAdapter.AddIngredients(ingredientToCreate);
 
                 }
 
@@ -67,10 +81,10 @@ namespace TaskManagerApp.Domain.Services
                     MealId = mealId,
                     IngredientId = ingerdientId
                 };
-                await _foodAdapter.SaveMealIngredients(mealIngredient);
+                 await _foodAdapter.SaveMealIngredients(mealIngredient);
             }
 
-
+            
         }
     }
 }
